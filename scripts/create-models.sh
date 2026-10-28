@@ -11,10 +11,10 @@ CONFIG="${OMP_CONFIG:-$HOME/.omp/agent/config.yml}"
 MODELS_FILE="$(cd "$(dirname "$0")/.." && pwd)/models/steady-memory-models.json"
 
 if [ -z "$TOKEN" ] && [ -f "$CONFIG" ]; then
-  TOKEN=$(awk '/^  apiToken:/{print $2; exit}' "$CONFIG")
+  TOKEN=$(awk '/^  apiToken:/{v=$2; gsub(/^[\"\x27]|[\"\x27]$/, "", v); print v; exit}' "$CONFIG")
 fi
 if [ -z "$BANK" ] && [ -f "$CONFIG" ]; then
-  BANK=$(awk '/^  bankId:/{print $2; exit}' "$CONFIG")
+  BANK=$(awk '/^  bankId:/{v=$2; gsub(/^[\"\x27]|[\"\x27]$/, "", v); print v; exit}' "$CONFIG")
 fi
 : "${TOKEN:?Set HINDSIGHT_TOKEN or add hindsight.apiToken to $CONFIG}"
 : "${BANK:?Set HINDSIGHT_BANK_ID or add hindsight.bankId to $CONFIG}"
