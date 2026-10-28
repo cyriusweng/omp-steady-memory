@@ -5,6 +5,11 @@ Two small pieces that keep an OMP (Oh My Pi) agent's voice and memory stable acr
 - **Hermes Agent** loads a small, hard-capped memory block at the start of every session, so the persona and what the agent knows about you never fall out of context.
 - **SillyTavern** re-asserts the character's voice right before each generation (`post_history_instructions`), so long conversations don't drift.
 
+## Requirements
+
+- The extension half works with any OMP memory backend.
+- The mental-model half needs the `hindsight` backend: set `memory.backend: hindsight` and have a reachable Hindsight server. On other backends (`off`, `local`, `mnemopi`, `sharpshooter`) you can still use the extension alone. Details in "Backend note" below.
+
 ## What's inside
 
 - `extensions/steady-memory.mjs` — OMP extension. Before each generation it appends a hidden, static reminder of your voice rules after the last message. Static text keeps provider prefix caches valid; cost is about 110 tokens per request. Main sessions only; subagents are skipped.
