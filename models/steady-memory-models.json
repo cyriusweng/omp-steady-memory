@@ -1,0 +1,18 @@
+{
+  "models": [
+    {
+      "id": "user-portrait",
+      "name": "User Portrait",
+      "source_query": "Which durable facts describe who the user is as a person: identity and context, aesthetic and design taste, communication preferences and hard language rules, values, boundaries, long-term goals? Keep only stable traits confirmed across sessions. Exclude project state, transient tasks, one-off requests, and coding or tooling preferences — those belong in user-preferences or working-memory.",
+      "max_tokens": 700,
+      "trigger": { "mode": "delta", "refresh_after_consolidation": true }
+    },
+    {
+      "id": "working-memory",
+      "name": "Working Memory",
+      "source_query": "What is the user currently working on across all projects: active projects and their state, decisions made with rationale, open threads, pending approvals, recent corrections, unfinished work? Include only what matters for continuing work in a new session. Exclude stable personal traits and preferences — those belong in user-portrait and user-preferences.",
+      "max_tokens": 900,
+      "trigger": { "mode": "delta", "refresh_after_consolidation": true }
+    }
+  ]
+}
